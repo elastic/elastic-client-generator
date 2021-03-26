@@ -9,6 +9,64 @@ the basic types [here](https://www.typescriptlang.org/docs/handbook/basic-types.
 while in [behaviors](./behaviors.md) you can find the list of special interfaces used
 for describing APIs that can't be represented in the specification.
 
+### Code generator property name hints
+
+In some cases you need to tell to language generators how to name a property.
+This might happen because the default name cannot be used in the language or because
+some APIs do not define the body as a structured object, but accept a generic instead.
+In those cases you should add a js doc tag to suggest to language generators what
+property name should be used.
+
+It's important to mention that language generators **don't have to** respect the name hint.
+It is only a suggestion or it might apply only to specific languages.
+
+The js tag should be used as follows:
+```ts
+  /** @identifier document */
+  body: TDocument
+```
+
+Fo example: 
+```ts
+/**
+ * @rest_spec_name index
+ * @since 0.0.0
+ * @stability stable
+ * @class_serializer IndexRequestFormatter`1`
+ */
+interface IndexRequest<TDocument> extends RequestBase {
+  path_parts?: {
+    ...
+  }
+  query_parameters?: {
+    ...
+  }
+  /** @identifier document */
+  body?: TDocument
+}
+```
+
+Another example with enums:
+
+```ts
+enum DateMathTimeUnit {
+  /** @identifier Second */
+  s = 0,
+  /** @identifier Minute */
+  m = 1,
+  /** @identifier Hour */
+  h = 2,
+  /** @identifier Day */
+  d = 3,
+  /** @identifier Week */
+  w = 4,
+  /** @identifier Month */
+  M = 5,
+  /** @identifier Year */
+  y = 6
+}
+```
+
 ### Dictionary
 
 Represents a dynamic key value map:

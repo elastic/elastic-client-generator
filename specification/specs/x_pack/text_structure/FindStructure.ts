@@ -38,6 +38,7 @@ interface FindStructureRequest<TBody> {
     timestamp_field?: Field
     timestamp_format?: string
   }
+  /** @identifier contents */
   body: TBody
 }
 

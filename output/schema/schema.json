@@ -40097,6 +40097,7 @@
           }
         }
       },
+      "bodyIdentifier": "document",
       "generics": [
         "TDocument"
       ],
@@ -53961,6 +53962,7 @@
           }
         }
       },
+      "bodyIdentifier": "contents",
       "generics": [
         "TBody"
       ],
@@ -67859,6 +67861,7 @@
           }
         }
       },
+      "bodyIdentifier": "document",
       "generics": [
         "TDocument"
       ],
