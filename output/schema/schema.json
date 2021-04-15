@@ -4513,7 +4513,7 @@
         "name": "GetIndexSettingsResponse",
         "namespace": "indices.index_settings.get_index_settings"
       },
-      "since": "0.0.0",
+      "since": "1.3.0",
       "stability": "stable",
       "urls": [
         {
@@ -38538,7 +38538,7 @@
           "type": {
             "kind": "instance_of",
             "type": {
-              "name": "ClusterStateBlockIndexSettingRouting",
+              "name": "IndexRouting",
               "namespace": "cluster"
             }
           }
@@ -38752,56 +38752,6 @@
             "type": {
               "name": "Name",
               "namespace": "internal"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "kind": "interface",
-      "name": {
-        "name": "ClusterStateBlockIndexSettingRouting",
-        "namespace": "cluster"
-      },
-      "properties": [
-        {
-          "name": "allocation",
-          "required": true,
-          "type": {
-            "kind": "instance_of",
-            "type": {
-              "name": "ClusterStateBlockIndexSettingRoutingAllocation",
-              "namespace": "cluster"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "kind": "interface",
-      "name": {
-        "name": "ClusterStateBlockIndexSettingRoutingAllocation",
-        "namespace": "cluster"
-      },
-      "properties": [
-        {
-          "name": "include",
-          "required": true,
-          "type": {
-            "key": {
-              "kind": "instance_of",
-              "type": {
-                "name": "string",
-                "namespace": "internal"
-              }
-            },
-            "kind": "dictionary_of",
-            "value": {
-              "kind": "instance_of",
-              "type": {
-                "name": "string",
-                "namespace": "internal"
-              }
             }
           }
         }
@@ -63731,6 +63681,7 @@
         {
           "name": "allow_no_indices",
           "required": false,
+          "serverDefault": true,
           "type": {
             "kind": "instance_of",
             "type": {
@@ -63742,6 +63693,7 @@
         {
           "name": "expand_wildcards",
           "required": false,
+          "serverDefault": "all",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -63751,8 +63703,10 @@
           }
         },
         {
+          "description": "If true, returns settings in flat format.",
           "name": "flat_settings",
           "required": false,
+          "serverDefault": false,
           "type": {
             "kind": "instance_of",
             "type": {
@@ -63762,8 +63716,10 @@
           }
         },
         {
+          "description": "If true, missing or closed indices are not included in the response.",
           "name": "ignore_unavailable",
           "required": false,
+          "serverDefault": false,
           "type": {
             "kind": "instance_of",
             "type": {
@@ -63773,8 +63729,10 @@
           }
         },
         {
+          "description": "If true, return all default settings in the response.",
           "name": "include_defaults",
           "required": false,
+          "serverDefault": false,
           "type": {
             "kind": "instance_of",
             "type": {
@@ -63784,8 +63742,10 @@
           }
         },
         {
+          "description": "If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.",
           "name": "local",
           "required": false,
+          "serverDefault": false,
           "type": {
             "kind": "instance_of",
             "type": {
@@ -63795,8 +63755,10 @@
           }
         },
         {
+          "description": "Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.",
           "name": "master_timeout",
           "required": false,
+          "serverDefault": "30s",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -71965,6 +71927,184 @@
     {
       "kind": "interface",
       "name": {
+        "name": "IndexRouting",
+        "namespace": "cluster"
+      },
+      "properties": [
+        {
+          "name": "allocation",
+          "required": false,
+          "type": {
+            "kind": "instance_of",
+            "type": {
+              "name": "IndexRoutingAllocation",
+              "namespace": "cluster"
+            }
+          }
+        },
+        {
+          "name": "rebalance",
+          "required": false,
+          "type": {
+            "kind": "instance_of",
+            "type": {
+              "name": "IndexRoutingRebalance",
+              "namespace": "cluster"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "kind": "interface",
+      "name": {
+        "name": "IndexRoutingAllocation",
+        "namespace": "cluster"
+      },
+      "properties": [
+        {
+          "description": "server_default all",
+          "name": "enable",
+          "required": false,
+          "type": {
+            "kind": "instance_of",
+            "type": {
+              "name": "IndexRoutingAllocationOptions",
+              "namespace": "cluster"
+            }
+          }
+        },
+        {
+          "name": "include",
+          "required": true,
+          "type": {
+            "key": {
+              "kind": "instance_of",
+              "type": {
+                "name": "string",
+                "namespace": "internal"
+              }
+            },
+            "kind": "dictionary_of",
+            "value": {
+              "kind": "instance_of",
+              "type": {
+                "name": "string",
+                "namespace": "internal"
+              }
+            }
+          }
+        },
+        {
+          "name": "initial_recovery",
+          "required": false,
+          "type": {
+            "key": {
+              "kind": "instance_of",
+              "type": {
+                "name": "string",
+                "namespace": "internal"
+              }
+            },
+            "kind": "dictionary_of",
+            "value": {
+              "kind": "instance_of",
+              "type": {
+                "name": "string",
+                "namespace": "internal"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "kind": "enum",
+      "members": [
+        {
+          "name": "all"
+        },
+        {
+          "name": "primaries"
+        },
+        {
+          "name": "new_primaries"
+        },
+        {
+          "name": "none"
+        }
+      ],
+      "name": {
+        "name": "IndexRoutingAllocationOptions",
+        "namespace": "cluster"
+      }
+    },
+    {
+      "kind": "interface",
+      "name": {
+        "name": "IndexRoutingRebalance",
+        "namespace": "cluster"
+      },
+      "properties": [
+        {
+          "description": "server_default all",
+          "name": "enable",
+          "required": true,
+          "type": {
+            "kind": "instance_of",
+            "type": {
+              "name": "IndexRoutingRebalanceOptions",
+              "namespace": "cluster"
+            }
+          }
+        },
+        {
+          "name": "include",
+          "required": true,
+          "type": {
+            "key": {
+              "kind": "instance_of",
+              "type": {
+                "name": "string",
+                "namespace": "internal"
+              }
+            },
+            "kind": "dictionary_of",
+            "value": {
+              "kind": "instance_of",
+              "type": {
+                "name": "string",
+                "namespace": "internal"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "kind": "enum",
+      "members": [
+        {
+          "name": "all"
+        },
+        {
+          "name": "primaries"
+        },
+        {
+          "name": "replicas"
+        },
+        {
+          "name": "none"
+        }
+      ],
+      "name": {
+        "name": "IndexRoutingRebalanceOptions",
+        "namespace": "cluster"
+      }
+    },
+    {
+      "kind": "interface",
+      "name": {
         "name": "IndexSegment",
         "namespace": "indices.monitoring.indices_segments"
       },
@@ -72072,79 +72212,6 @@
       ]
     },
     {
-      "kind": "interface",
-      "name": {
-        "name": "IndexSettingRouting",
-        "namespace": "cluster"
-      },
-      "properties": [
-        {
-          "name": "allocation.enable",
-          "required": false,
-          "type": {
-            "kind": "instance_of",
-            "type": {
-              "name": "IndexSettingRoutingAllocation",
-              "namespace": "cluster"
-            }
-          }
-        },
-        {
-          "name": "rebalance.enable",
-          "required": false,
-          "type": {
-            "kind": "instance_of",
-            "type": {
-              "name": "IndexSettingRoutingRebalance",
-              "namespace": "cluster"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "kind": "enum",
-      "members": [
-        {
-          "name": "all"
-        },
-        {
-          "name": "primaries"
-        },
-        {
-          "name": "new_primaries"
-        },
-        {
-          "name": "none"
-        }
-      ],
-      "name": {
-        "name": "IndexSettingRoutingAllocation",
-        "namespace": "cluster"
-      }
-    },
-    {
-      "kind": "enum",
-      "members": [
-        {
-          "name": "all"
-        },
-        {
-          "name": "primaries"
-        },
-        {
-          "name": "replicas"
-        },
-        {
-          "name": "none"
-        }
-      ],
-      "name": {
-        "name": "IndexSettingRoutingRebalance",
-        "namespace": "cluster"
-      }
-    },
-    {
       "docUrl": "https://www.elastic.co/guide/en/elasticsearch/reference/7.8/index-modules.html#index-modules-settings",
       "kind": "interface",
       "name": {
@@ -72158,6 +72225,7 @@
           ],
           "name": "number_of_shards",
           "required": false,
+          "serverDefault": "1",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72172,6 +72240,7 @@
           ],
           "name": "number_of_replicas",
           "required": false,
+          "serverDefault": "0",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72200,6 +72269,7 @@
           ],
           "name": "check_on_startup",
           "required": false,
+          "serverDefault": "false",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72214,6 +72284,7 @@
           ],
           "name": "codec",
           "required": false,
+          "serverDefault": "LZ4",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72228,6 +72299,7 @@
           ],
           "name": "routing_partition_size",
           "required": false,
+          "serverDefault": "1",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72242,6 +72314,7 @@
           ],
           "name": "soft_deletes.retention_lease.period",
           "required": false,
+          "serverDefault": "12h",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72256,6 +72329,7 @@
           ],
           "name": "load_fixed_bitset_filters_eagerly",
           "required": false,
+          "serverDefault": true,
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72270,6 +72344,7 @@
           ],
           "name": "hidden",
           "required": false,
+          "serverDefault": false,
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72284,6 +72359,7 @@
           ],
           "name": "auto_expand_replicas",
           "required": false,
+          "serverDefault": "false",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72298,6 +72374,7 @@
           ],
           "name": "search.idle.after",
           "required": false,
+          "serverDefault": "30s",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72312,6 +72389,7 @@
           ],
           "name": "refresh_interval",
           "required": false,
+          "serverDefault": "1s",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72326,6 +72404,7 @@
           ],
           "name": "max_result_window",
           "required": false,
+          "serverDefault": "10000",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72340,6 +72419,7 @@
           ],
           "name": "max_inner_result_window",
           "required": false,
+          "serverDefault": "100",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72354,6 +72434,7 @@
           ],
           "name": "max_rescore_window",
           "required": false,
+          "serverDefault": "10000",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72368,6 +72449,7 @@
           ],
           "name": "max_docvalue_fields_search",
           "required": false,
+          "serverDefault": "100",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72382,6 +72464,7 @@
           ],
           "name": "max_script_fields",
           "required": false,
+          "serverDefault": "32",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72396,6 +72479,7 @@
           ],
           "name": "max_ngram_diff",
           "required": false,
+          "serverDefault": "1",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72410,6 +72494,7 @@
           ],
           "name": "max_shingle_diff",
           "required": false,
+          "serverDefault": "3",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72452,6 +72537,7 @@
           ],
           "name": "analyze.max_token_count",
           "required": false,
+          "serverDefault": "10000",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72466,6 +72552,7 @@
           ],
           "name": "highlight.max_analyzed_offset",
           "required": false,
+          "serverDefault": "1000000",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72480,6 +72567,7 @@
           ],
           "name": "max_terms_count",
           "required": false,
+          "serverDefault": "65536",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72494,6 +72582,7 @@
           ],
           "name": "max_regex_length",
           "required": false,
+          "serverDefault": "1000",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72511,7 +72600,7 @@
           "type": {
             "kind": "instance_of",
             "type": {
-              "name": "IndexSettingRouting",
+              "name": "IndexRouting",
               "namespace": "cluster"
             }
           }
@@ -72522,6 +72611,7 @@
           ],
           "name": "gc_deletes",
           "required": false,
+          "serverDefault": "60s",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72536,6 +72626,7 @@
           ],
           "name": "default_pipeline",
           "required": false,
+          "serverDefault": "_none",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72550,6 +72641,7 @@
           ],
           "name": "final_pipeline",
           "required": false,
+          "serverDefault": "_none",
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72569,7 +72661,7 @@
       "properties": [
         {
           "name": "aliases",
-          "required": true,
+          "required": false,
           "type": {
             "key": {
               "kind": "instance_of",
@@ -72590,7 +72682,7 @@
         },
         {
           "name": "mappings",
-          "required": true,
+          "required": false,
           "type": {
             "kind": "instance_of",
             "type": {
@@ -72601,6 +72693,26 @@
         },
         {
           "name": "settings",
+          "required": true,
+          "type": {
+            "kind": "instance_of",
+            "type": {
+              "name": "IndexStateSettings",
+              "namespace": "index_modules.index_settings"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "kind": "interface",
+      "name": {
+        "name": "IndexStateSettings",
+        "namespace": "index_modules.index_settings"
+      },
+      "properties": [
+        {
+          "name": "index",
           "required": true,
           "type": {
             "kind": "instance_of",
