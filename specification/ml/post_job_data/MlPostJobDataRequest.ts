@@ -17,26 +17,24 @@
  * under the License.
  */
 
-import { UserDefinedValue } from '@spec_utils/UserDefinedValue'
 import { RequestBase } from '@_types/Base'
 import { Id } from '@_types/common'
 import { DateString } from '@_types/Time'
 
 /**
+ * deprecated 7.11.0
  * @rest_spec_name ml.post_data
- * @since 5.4.0
- *
+ * @since 5.5.0
  * @stability TODO
  */
-export interface Request extends RequestBase {
-  path_parts: {
+interface Request<TJsonDocument> extends RequestBase {
+  path_parts?: {
     job_id: Id
   }
   query_parameters?: {
     reset_end?: DateString
     reset_start?: DateString
   }
-  body?: {
-    data?: UserDefinedValue[]
-  }
+  /** @doc_url https://www.elastic.co/guide/en/elasticsearch/reference/7.11/ml-post-data.html#_request_body_23 */
+  body: TJsonDocument[] | TJsonDocument
 }

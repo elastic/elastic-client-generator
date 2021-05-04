@@ -10643,6 +10643,40 @@ export interface MlDeleteForecastRequest extends RequestBase {
 
 export interface MlDeleteForecastResponse extends AcknowledgedResponseBase {}
 
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+export interface PostJobDataRequest<TJson = unknown> extends RequestBase {
+  job_id: Id
+  reset_end?: DateString
+  reset_start?: DateString
+  body: TJson
+=======
+export interface PostJobDataRequest<TJsonDocument = unknown> extends RequestBase {
+  job_id: Id
+  reset_end?: DateString
+  reset_start?: DateString
+  body: Array<TJsonDocument>
+>>>>>>> Stashed changes
+}
+
+export interface PostJobDataResponse extends ResponseBase {
+  bucket_count: long
+  earliest_record_timestamp?: integer
+  empty_bucket_count: long
+  input_bytes: long
+  input_field_count: long
+  input_record_count: long
+  invalid_date_count: long
+  job_id: Id
+  last_data_time: integer
+  latest_record_timestamp?: integer
+  missing_field_count: long
+  out_of_order_timestamp_count: long
+  processed_field_count: long
+  processed_record_count: long
+  sparse_bucket_count: long
+}
+=======
 export interface MlDeleteJobRequest extends RequestBase {
   job_id: Id
   force?: boolean
@@ -10650,6 +10684,7 @@ export interface MlDeleteJobRequest extends RequestBase {
 }
 
 export interface MlDeleteJobResponse extends AcknowledgedResponseBase {}
+>>>>>>> master
 
 export interface MlDeleteModelSnapshotRequest extends RequestBase {
   job_id: Id

@@ -7422,8 +7422,13 @@
         "name": "Response",
         "namespace": "ml.post_job_data"
       },
+<<<<<<< HEAD
+      "since": "5.5.0",
+      "stability": "stable",
+=======
       "since": "5.4.0",
       "stability": "TODO",
+>>>>>>> master
       "urls": [
         {
           "methods": [
@@ -95547,6 +95552,30 @@
               "namespace": "_types"
             }
           }
+<<<<<<< HEAD
+        }
+      ]
+    },
+    {
+      "attachedBehaviors": [
+        "CommonQueryParameters"
+      ],
+      "body": {
+        "kind": "value",
+        "value": {
+<<<<<<< Updated upstream
+          "kind": "instance_of",
+          "type": {
+            "name": "TJson",
+            "namespace": "x_pack.machine_learning.post_job_data"
+=======
+          "kind": "array_of",
+          "value": {
+            "kind": "instance_of",
+            "type": {
+              "name": "TJsonDocument",
+              "namespace": "x_pack.machine_learning.post_job_data"
+=======
         },
         {
           "name": "target_field",
@@ -95556,9 +95585,27 @@
             "type": {
               "name": "Field",
               "namespace": "_types"
+>>>>>>> master
             }
+>>>>>>> Stashed changes
           }
+<<<<<<< HEAD
+        }
+      },
+      "generics": [
+        {
+<<<<<<< Updated upstream
+          "name": "TJson",
+=======
+          "name": "TJsonDocument",
+>>>>>>> Stashed changes
+          "namespace": "x_pack.machine_learning.post_job_data"
+        }
+      ],
+      "inherits": [
+=======
         },
+>>>>>>> master
         {
           "name": "field_map",
           "required": false,
@@ -95655,8 +95702,13 @@
           }
         },
         {
+<<<<<<< HEAD
+          "name": "earliest_record_timestamp",
+          "required": false,
+=======
           "name": "separator",
           "required": true,
+>>>>>>> master
           "type": {
             "kind": "instance_of",
             "type": {
@@ -95770,7 +95822,7 @@
           "type": {
             "kind": "instance_of",
             "type": {
-              "name": "string",
+              "name": "Id",
               "namespace": "internal"
             }
           }
@@ -95787,7 +95839,11 @@
           }
         },
         {
+<<<<<<< HEAD
+          "name": "latest_record_timestamp",
+=======
           "name": "include_keys",
+>>>>>>> master
           "required": false,
           "type": {
             "kind": "array_of",
