@@ -10556,6 +10556,7 @@ export interface MlCloseJobRequest extends RequestBase {
   allow_no_jobs?: boolean
   force?: boolean
   timeout?: Time
+  body?: EmptyObject
 }
 
 export interface MlCloseJobResponse {
