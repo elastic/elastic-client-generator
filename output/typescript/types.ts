@@ -10056,6 +10056,7 @@ export interface MigrationDeprecationInfoResponse {
 
 export interface MlAnalysisConfig {
   bucket_span: TimeSpan
+  categorization_analyzer?: MlCategorizationAnalyzer | string
   categorization_field_name?: Field
   categorization_filters?: string[]
   detectors: MlDetector[]
@@ -10064,12 +10065,11 @@ export interface MlAnalysisConfig {
   multivariate_by_fields?: boolean
   per_partition_categorization?: MlPerPartitionCategorization
   summary_count_field_name?: Field
-  categorization_analyzer?: MlCategorizationAnalyzer | string
 }
 
 export interface MlAnalysisLimits {
   categorization_examples_limit?: long
-  model_memory_limit: string
+  model_memory_limit?: string
 }
 
 export interface MlAnalysisMemoryLimit {
@@ -10157,9 +10157,9 @@ export interface MlCalendarEvent {
 }
 
 export interface MlCategorizationAnalyzer {
+  char_filter?: (string | AnalysisCharFilter)[]
   filter?: (string | AnalysisTokenFilter)[]
   tokenizer?: string | AnalysisTokenizer
-  char_filter?: (string | AnalysisCharFilter)[]
 }
 
 export type MlCategorizationStatus = 'ok' | 'warn'
@@ -10532,9 +10532,9 @@ export interface MlDetector {
   exclude_frequent?: MlExcludeFrequent
   field_name?: Field
   function: string
-  use_null?: boolean
   over_field_name?: Field
   partition_field_name?: Field
+  use_null?: boolean
 }
 
 export interface MlDiscoveryNode {
@@ -10555,7 +10555,7 @@ export interface MlFilter {
 
 export interface MlFilterRef {
   filter_id: Id
-  filter_type: MlFilterType
+  filter_type?: MlFilterType
 }
 
 export type MlFilterType = 'include' | 'exclude'
@@ -10659,9 +10659,9 @@ export interface MlJobTimingStats {
 export type MlMemoryStatus = 'ok' | 'soft_limit' | 'hard_limit'
 
 export interface MlModelPlotConfig {
-  terms?: Field
-  enabled: boolean
   annotations_enabled?: boolean
+  enabled?: boolean
+  terms?: Field
 }
 
 export interface MlModelSizeStats {
@@ -11603,12 +11603,13 @@ export interface MlPutJobRequest extends RequestBase {
     analysis_limits?: MlAnalysisLimits
     background_persist_interval: Time
     custom_settings?: MlCustomSettings
-    data_description?: MlDataDescription
     daily_model_snapshot_retention_after_days?: long
-    groups?: string[]
+    data_description?: MlDataDescription
     description?: string
+    groups?: string[]
     model_plot_config?: MlModelPlotConfig
     model_snapshot_retention_days?: long
+    renormalization_window_days?: long
     results_index_name?: IndexName
     results_retention_days?: long
   }
